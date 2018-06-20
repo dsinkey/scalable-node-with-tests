@@ -37,7 +37,6 @@ class CustomPage {
   }
 
   get(path) {
-
     return this.page.evaluate((_path) => {
         return fetch(_path, {
           method: 'GET',
@@ -61,6 +60,13 @@ class CustomPage {
           body: JSON.stringify(_data)
         }).then(res => res.json());
       }, path, data);
+  }
+
+  executeRequests(actions) {
+    return Promise.all(actions.map(({ method, path, data }) => {
+      return this[method](path, data);
+      })
+    );
   }
 }
 
