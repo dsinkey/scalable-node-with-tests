@@ -24,6 +24,7 @@ class CustomPage {
   }
 
   async login() {
+    
     const user = await userFactory();
     const { session, sig } = sessionFactory(user);
 
